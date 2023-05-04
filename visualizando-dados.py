@@ -8,7 +8,7 @@ plt.plot(years, gdp, color='green', marker='o', linestyle='solid')
 plt.title('Nominal GDP')
 plt.ylabel('Billions of $')
 
-# plt.show()
+plt.show()
 # plt.savefig('im/viz_gdp.png')
 plt.gca().clear()
 
@@ -21,7 +21,7 @@ plt.title('My Favorite Movies')
 plt.ylabel('# of Academy Awards')
 plt.xticks(range(len(movies)), movies)
 
-# plt.show()
+plt.show()
 plt.gca().clear()
 
 
@@ -44,7 +44,7 @@ plt.xlabel("Decile")
 plt.ylabel('# of Studentes')
 plt.title('Distribution of Exam 1 Grades')
 
-# plt.show()
+plt.show()
 plt.gca().clear()
 
 ''' gráfico de barras que mostra o aumento de vezes que alguém diz data science '''
@@ -58,7 +58,7 @@ plt.ticklabel_format(useOffset=False)
 plt.axis([2016.5, 2018.5, 499, 506])
 plt.title("Look at the 'Huge' Increase!")
 
-# plt.show()
+plt.show()
 plt.gca().clear()
 
 ''' gráfico de linha '''
@@ -76,7 +76,7 @@ plt.xlabel('model complexity')
 plt.xticks([])
 plt.title('The Bias-Variance Tradeoff')
 
-# plt.show()
+plt.show()
 plt.gca().clear()
 
 ''' gráfico de dispersão '''
