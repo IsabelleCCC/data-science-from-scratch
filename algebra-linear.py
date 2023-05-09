@@ -102,3 +102,20 @@ def get_row(A: Matrix, i: int) -> Vector:
 def get_col(A: Matrix, j: int) -> Vector:
      return [A_i[j] for A_i in A]
 
+from typing import Callable
+
+def make_matrix(num_rows: int, num_cols: int, entry_fn: Callable[[int, int], float]) -> Matrix:
+     return [[entry_fn(i, j)
+             for j in range(num_cols)]
+                for i in range(num_rows)]
+
+def identity_matrix(n: int):
+     return make_matrix(n, n, lambda i, j: 1 if i == j else 0)
+
+print(identity_matrix(5))
+
+assert identity_matrix(5) == [[1, 0, 0, 0, 0],
+                              [0, 1, 0, 0, 0],
+                              [0, 0, 1, 0, 0],
+                              [0, 0, 0, 1, 0],
+                              [0, 0, 0, 0, 1]]
