@@ -1,6 +1,10 @@
+from typing import Callable
+from typing import Tuple
+import math
 from typing import List
 
 Vector = List[float]
+
 
 def add(v: Vector, w: Vector) -> Vector:
     ''' Adds corresponding elements '''
@@ -8,7 +12,9 @@ def add(v: Vector, w: Vector) -> Vector:
 
     return [v_i + w_i for v_i, w_i in zip(v, w)]
 
+
 assert add([1, 2, 3], [4, 5, 6]) == [5, 7, 9]
+
 
 def subtract(v: Vector, w: Vector) -> Vector:
     ''' Substract corresponding elements '''
@@ -16,7 +22,9 @@ def subtract(v: Vector, w: Vector) -> Vector:
 
     return [v_i - w_i for v_i, w_i in zip(v, w)]
 
+
 assert subtract([5, 7, 9], [4, 5, 6]) == [1, 2, 3]
+
 
 def vector_sum(vectors: List[Vector]) -> Vector:
     ''' Sums all corresponding elements '''
@@ -28,20 +36,26 @@ def vector_sum(vectors: List[Vector]) -> Vector:
     return [sum(vector[i] for vector in vectors)
             for i in range(num_elements)]
 
+
 assert vector_sum([[1, 2], [3, 4], [5, 6], [7, 8]]) == [16, 20]
+
 
 def scalar_multiply(c: float, v: Vector) -> Vector:
     ''' Multiplies every element by c '''
     return [i * c for i in v]
 
+
 assert scalar_multiply(2, [1, 2, 3]) == [2, 4, 6]
+
 
 def vector_mean(vectors: List[Vector]) -> Vector:
     ''' Computa a média dos elementos '''
     n = len(vectors)
     return scalar_multiply(1/n, vector_sum(vectors))
 
+
 assert vector_mean([[1, 2], [3, 4], [5, 6]]) == [3, 4]
+
 
 def dot(v: Vector, w: Vector) -> float:
     """Computes v_1 * w_1 + ... + v_n * w_n"""
@@ -49,33 +63,40 @@ def dot(v: Vector, w: Vector) -> float:
 
     return sum(v_i * w_i for v_i, w_i in zip(v, w))
 
+
 assert dot([1, 2, 3], [4, 5, 6]) == 32
+
 
 def sum_of_squares(v: Vector) -> float:
     ''' Returns v_1 * v_1 + ... v_n * v_n '''
     return dot(v, v)
 
+
 assert sum_of_squares([1, 2, 3]) == 14
 
-import math
 
 def magnitude(v: Vector) -> float:
 	return math.sqrt(sum_of_squares(v))
 
+
 assert magnitude([3, 4]) == 5
 
+
 def squared_distance(v: Vector, w: Vector) -> float:
-     ''' Computes (v_1 - w_1) ** 2 + ... + (v_n - w_n) ** 2 '''
-     return sum_of_squares(subtract(v, w))
+    ''' Computes (v_1 - w_1) ** 2 + ... + (v_n - w_n) ** 2 '''
+    return sum_of_squares(subtract(v, w))
+
 
 def distance(v: Vector, w: Vector) -> float:
-     ''' Computes distance between v and w '''
-     return math.sqrt(squared_distance(v, w))
+    ''' Computes distance between v and w '''
+    return math.sqrt(squared_distance(v, w))
 
 # or
 
+
 def distance(v: Vector, w: Vector):
-     return magnitude(subtract(v , w))
+    return magnitude(subtract(v, w))
+
 
 Matrix = List[List[float]]
 
@@ -84,35 +105,38 @@ A = [[1, 2, 3],
 
 B = [[1, 2],
      [3, 4],
-      [5, 6]]
+     [5, 6]]
 
-from typing import Tuple
 
 def shape(A: Matrix) -> Tuple[int, int]:
-     '''' Returns n of rows and n of columns '''
-     num_rows = len(A)
-     num_cols = len(A[0]) if A else 0
-     return num_rows, num_cols
+    '''' Returns n of rows and n of columns '''
+    num_rows = len(A)
+    num_cols = len(A[0]) if A else 0
+    return num_rows, num_cols
 
-assert shape([[1, 2, 3], [4, 5, 6]]) == (2 , 3)
+
+assert shape([[1, 2, 3], [4, 5, 6]]) == (2, 3)
+
 
 def get_row(A: Matrix, i: int) -> Vector:
-     return A[i]
+    return A[i]
+
 
 def get_col(A: Matrix, j: int) -> Vector:
-     return [A_i[j] for A_i in A]
+    return [A_i[j] for A_i in A]
 
-from typing import Callable
 
 def make_matrix(num_rows: int, num_cols: int, entry_fn: Callable[[int, int], float]) -> Matrix:
-     return [[entry_fn(i, j)
+    return [[entry_fn(i, j)
              for j in range(num_cols)]
-                for i in range(num_rows)]
+            for i in range(num_rows)]
+
 
 def identity_matrix(n: int):
-     return make_matrix(n, n, lambda i, j: 1 if i == j else 0)
+    return make_matrix(n, n, lambda i, j: 1 if i == j else 0)
 
-print(identity_matrix(5))
+
+assert(identity_matrix(5) == [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, 0, 0, 0, 1]])
 
 assert identity_matrix(5) == [[1, 0, 0, 0, 0],
                               [0, 1, 0, 0, 0],

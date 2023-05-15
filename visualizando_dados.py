@@ -1,3 +1,4 @@
+from collections import Counter
 from matplotlib import pyplot as plt
 
 ''' gráfico de linha que mostra o pib ao longo dos anos '''
@@ -26,7 +27,6 @@ plt.gca().clear()
 
 
 ''' Histograma que mostra distribuição de notas dos estudantes ao longo do eixo '''
-from collections import Counter
 
 grades = [83, 95, 91, 87, 70, 0, 85, 82, 100, 67, 73, 77, 0]
 
@@ -35,9 +35,9 @@ histogram = Counter(min(grade // 10 * 10, 90) for grade in grades)
 plt.bar([x + 5 for x in histogram.keys()],
         histogram.values(),
         10,
-        edgecolor=(0,0,0))
+        edgecolor=(0, 0, 0))
 
-plt.axis([-5,105,0,5])
+plt.axis([-5, 105, 0, 5])
 
 plt.xticks([10*i for i in range(11)])
 plt.xlabel("Decile")
@@ -62,9 +62,9 @@ plt.show()
 plt.gca().clear()
 
 ''' gráfico de linha '''
-variance     = [1, 2, 4, 8, 16, 32, 64, 128, 256]
+variance = [1, 2, 4, 8, 16, 32, 64, 128, 256]
 bias_squared = [256, 128, 64, 32, 16, 8, 4, 2, 1]
-total_error  = [x + y for x, y in zip(variance, bias_squared)]
+total_error = [x + y for x, y in zip(variance, bias_squared)]
 xs = [i for i, _ in enumerate(variance)]
 
 plt.plot(xs, variance, 'g-', label='variance')
@@ -80,18 +80,18 @@ plt.show()
 plt.gca().clear()
 
 ''' gráfico de dispersão '''
-friends = [ 70,  65,  72,  63,  71,  64,  60,  64,  67]
+friends = [70,  65,  72,  63,  71,  64,  60,  64,  67]
 minutes = [175, 170, 205, 120, 220, 130, 105, 145, 190]
-labels =  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
 
 plt.scatter(friends, minutes)
 
 for label, friend_count, minute_count in zip(labels, friends, minutes):
     plt.annotate(label,
-                xy=(friend_count, minute_count),
+                 xy=(friend_count, minute_count),
                  xytext=(5, -5),
-                  textcoords='offset points')
-    
+                 textcoords='offset points')
+
 plt.title('Daily Minutes vs. Number of Friends')
 plt.xlabel('# of friends')
 plt.ylabel('daily minutes spent on the site')
